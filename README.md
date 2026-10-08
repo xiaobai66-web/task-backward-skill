@@ -1,61 +1,65 @@
 # Task-Backward Skill
 
-**Transform vague goals into actionable task maps through intent clarification and backward reasoning.**
+**AI often rushes to answer. You say one sentence and it starts talking, but it's answering the wrong question.**
+
+This Skill fixes that.
 
 [中文文档](README_CN.md) | [English](README.md)
 
 ---
 
-## The Problem
+## What's the Problem
 
-When working with AI assistants, you've probably experienced:
+When using AI assistants, you've probably hit these:
 
-- 🚨 **AI rushes to answer** — You say one sentence, AI immediately gives an answer, but it's answering the wrong question
-- 🤷 **Ambiguity ignored** — The same sentence can mean multiple things, but AI only picks one interpretation without telling you
-- ❓ **No "why"** — AI tells you *what* to do, but not *why* it matters or *how* it affects your goal
-- 📄 **Static tutorials** — AI gives you a fixed checklist that can't adapt when you provide new information
+- 🚨 **AI rushes ahead** — You say "I want to buy stocks" and it immediately recommends 5 stocks, but you actually wanted to learn first
+- 🤷 **Ambiguity ignored** — The same sentence can mean several things, but AI picks one and runs with it without telling you why
+- ❓ **Results without reasons** — AI tells you "do market research" but not why it matters or what happens if you skip it
+- 📄 **Fixed checklists** — AI gives you a static list that won't adjust when you add new information
 
-**This Skill solves these problems.**
+This Skill solves these problems.
 
 ---
 
 ## What It Does
 
-**Task-Backward** is an AI skill that:
+You give it a vague goal (like "I want to start a side business"), and it will:
 
-1. **Lists candidate interpretations** (2-4 options) when you describe a vague goal
-2. **Asks one key question** to identify the most critical fork in the road
-3. **Forms a "tentative goal"** that can be revised later (doesn't force you to be certain)
-4. **Backward-reasons key factors** (3-5 factors) with explanations:
+1. **List possible interpretations** (Do you want to learn how? Already decided and need help choosing what? Want to know if it's legal?)
+2. **Ask one key question** to confirm what you actually want
+3. **Form a "tentative goal"** that can be revised later (doesn't force you to be 100% clear upfront)
+4. **Backward-reason key factors** (side business needs: product selection, customers, location, costs...), explaining each:
    - What it is
    - Why it matters
    - How it affects your goal
    - Example scenarios
-   - When it doesn't apply
-5. **Generates a dynamic task map** that adjusts when you add new information
-6. **Prevents drift** — Always checks which step it's on, avoids sliding into "lecture mode"
+   - When you can ignore it
+5. **Generate a dynamic task map** that adjusts when you add information
+6. **Prevent drift** — Always checks which step it's on, avoids sliding into "lecture mode"
 
 ---
 
 ## Example: "I want to buy stocks"
 
 ### Without Task-Backward
+
 ```
 User: I want to buy stocks
 AI: Here are 5 great stocks to consider...
 ```
-❌ AI assumed you want stock recommendations. But maybe you wanted to learn first.
+❌ AI assumed you want recommendations. But maybe you wanted to learn first.
 
 ### With Task-Backward
+
 ```
 User: I want to buy stocks
 
 AI: I see several possible intents:
 A. Learn from zero (understand what stocks are)
-B. Get stock recommendations (which stocks to buy)
-C. Judge timing (when to buy)
+B. Get recommendations (which stocks to buy)
+C. Judge timing (is now a good time)
 D. Learn how to execute (open account, place order)
-E. Small-scale validation (test with small amount)
+E. Small-scale validation (test with a small amount)
 
 The biggest fork: Are you starting from zero, or do you already 
 understand stocks and want to take action?
@@ -63,7 +67,7 @@ understand stocks and want to take action?
 Which is closer to your intent?
 
 User: I want to learn first, build my own judgment, then test with 
-small capital
+a small amount
 
 AI: Got it. Let me backward-reason the key factors for 
 "learn → build judgment → validate"...
@@ -73,19 +77,19 @@ Key Factor 1: Stock knowledge foundation
 - Why it matters: Without these you can't read financial reports
 - How it affects: Determines whether you can judge "good company"
 - Example: A "good company" ≠ "current price worth buying"
-- When it fails: If you only want to follow others' advice, 
-  this knowledge is optional
+- When it doesn't matter: If you only want to follow others' advice, 
+  you can skip this
 
 ...
 ```
 
-✅ AI clarified your intent first, then backward-reasoned the factors with explanations.
+✅ AI clarified your intent first, then backward-reasoned the factors with full explanations.
 
 ---
 
 ## Is This Reinventing the Wheel?
 
-**No.** We researched GitHub and found:
+**Nope.** I checked GitHub:
 
 | Project | Candidate ranking | Option-based questioning | Structured confirmation | Backward reasoning | Causal explanation | Dynamic adjustment |
 |---------|-------------------|--------------------------|-------------------------|-------------------|--------------------|--------------------|
@@ -94,43 +98,43 @@ Key Factor 1: Stock knowledge foundation
 | **TypeChat** | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ |
 | **Task-Backward** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-The last three features (backward reasoning + causal explanation + dynamic adjustment) are **unique innovations** not found in existing projects.
+The last three features (backward reasoning + causal explanation + dynamic adjustment) are **unique** — no existing GitHub project does all of these.
 
-See [research/github-survey-2026-10.md](research/github-survey-2026-10.md) for details.
+Full research: [research/github-survey-2026-10.md](research/github-survey-2026-10.md).
 
 ---
 
-## Real-World Validation
+## Does It Actually Work?
 
 ### Test 1: Stock Investment Scenario
 - **Input**: "I want to buy stocks"
-- **Result**: AI listed 5 candidate intents → User clarified "learn first, then validate" → AI explained "good company ≠ current price worth buying" → Used quiz to check understanding
-- **Outcome**: Avoided the error of "directly recommending stocks", clarified true intent
+- **What happened**: AI listed 5 candidates → I said "learn first, then validate" → AI explained "good company ≠ current price worth buying" → Used quiz to check understanding
+- **Result**: Avoided the "recommend stocks immediately" error, clarified true intent
 - **Score**: 9.0/10
 
 ### Test 2: Agent Configuration Scenario
-- **Input**: "I keep seeing agent tutorials, I used to dismiss them, but now I realize agents need to be configured like workplace systems"
-- **Result**: AI listed 4 candidate intents → User chose A+B → AI backward-reasoned 5 key factors (agent operating mechanism, work folder structure, handoff skill design, etc.) → Explained each factor
-- **Outcome**: User went from "completely don't understand" to "understand configuration logic" in one conversation
+- **Input**: "I keep seeing agent tutorials, used to dismiss them, but now I realize agents need to be configured like workplace systems"
+- **What happened**: AI listed 4 candidates → I chose A+B → AI backward-reasoned 5 key factors (agent operating mechanism, work folder structure, handoff skill design, etc.) → Explained each factor
+- **Result**: Went from "completely don't understand" to "understand configuration logic" in one conversation
 - **Score**: 9.66/10
 
-See [examples/](examples/) for complete case studies.
+Full cases: [examples/](examples/).
 
 ---
 
-## Quick Start
+## How to Use
 
-### For Codex
+### For Codex Users
 1. Copy [skills/codex/SKILL.md](skills/codex/SKILL.md) to your Codex skills directory
 2. Restart Codex or reload skills
 3. Try: "I want to start a side business"
 
-### For DeepSeek Harness (Kiro)
+### For DeepSeek Harness (Kiro) Users
 1. Copy [skills/harness/task-backward.md](skills/harness/task-backward.md) to your Harness skills directory
 2. Restart Harness or reload skills
 3. Try: "I want to learn machine learning"
 
-### Trigger Conditions
+### When It Triggers
 
 **Will trigger:**
 - ✅ "I want to be a freelancer" (vague goal)
@@ -149,25 +153,25 @@ See [examples/](examples/) for complete case studies.
 
 - [Design Rationale](docs/design-rationale.md) — Why we built this
 - [Comparison with Existing Solutions](docs/comparison.md) — Detailed comparison with Rasa, PMAgent, TypeChat, etc.
-- [Case Studies](docs/case-studies.md) — Complete conversation logs and analysis
+- [Case Studies](examples/) — Complete conversation logs and analysis
 
 ---
 
 ## Strengths
 
-1. ✅ **Solves real pain points** — "AI rushing to answer" happens in actual testing
+1. ✅ **Solves real pain points** — "AI rushing to answer" actually happened in testing
 2. ✅ **Complete and validated design** — 10-step process tested in real complex scenarios
-3. ✅ **Backed by GitHub research** — No existing complete solution available
+3. ✅ **Not reinventing the wheel** — No existing complete solution on GitHub
 4. ✅ **Adapts to AI characteristics** — Preserves "unknown" fields, doesn't force AI to pretend certainty
 
 ---
 
 ## Limitations & Risks
 
-1. ⚠️ **High complexity** — May pull users into 10-step process for simple questions. Need clear trigger rules.
+1. ⚠️ **Could be too complex** — Simple questions might get pulled into the 10-step process. Need clear trigger rules.
 2. ⚠️ **Understanding checks may interrupt flow** — Only check when introducing new concepts or high-risk misunderstandings
 3. ⚠️ **Depends on LLM capability** — Candidate intents may be incomplete, probability scores may be inaccurate
-4. ⚠️ **Video demo vs. actual functionality** — Demo shows ideal state, actual use may have errors
+4. ⚠️ **Demo video vs. actual functionality** — Video shows ideal state, actual use may have errors
 
 ---
 
@@ -213,7 +217,7 @@ MIT License - see [LICENSE](LICENSE)
 
 ## Acknowledgments
 
-This project was inspired by real-world pain points encountered while working with AI assistants. Special thanks to:
+This project came from real pain points encountered while working with AI assistants. Special thanks to:
 
 - **Codex** — For providing the test environment and audit reports
 - **GitHub community** — For existing projects (Rasa, PMAgent, TypeChat) that informed our research
@@ -223,14 +227,14 @@ This project was inspired by real-world pain points encountered while working wi
 
 ## Citation
 
-If you use this skill in your research or project, please cite:
+If you use this skill in your research or project, you can cite it like this:
 
 ```bibtex
 @software{task_backward_skill_2026,
   title = {Task-Backward Skill: Intent Clarification and Backward Reasoning for AI Assistants},
-  author = {[Your Name]},
+  author = {xiaobai66-web},
   year = {2026},
-  url = {https://github.com/[your-username]/task-backward-skill}
+  url = {https://github.com/xiaobai66-web/task-backward-skill}
 }
 ```
 

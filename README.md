@@ -1,5 +1,13 @@
 # Task-Backward Skill
 
+> **⚠️ Notice: This project is archived**  
+> This project has been redesigned into two separate skills with better functionality and clearer structure.  
+> **Please visit the new version: https://github.com/xiaobai66-web/ai-intent-skills**  
+> 
+> This repository is kept as a historical reference and is no longer maintained.
+
+---
+
 **AI often rushes to answer. You say one sentence and it starts talking, but it's answering the wrong question.**
 
 This Skill fixes that.
